@@ -23,6 +23,26 @@ namespace md5Mgr
             textBox3.Hide();
             button5.Hide();
             label2.Hide();
+            if (Execution.provfile != "")
+            {
+                textBox1.Text = Execution.provfile;
+                if (File.Exists(textBox1.Text))
+                {
+                    try
+                    {
+                        richTextBox1.Text = $"{textBox1.Text} : {Execution.CalculateMD5(textBox1.Text)}";
+                        Console.WriteLine(Execution.CalculateMD5(textBox1.Text));//For use as debug
+                    }
+                    catch (Exception xe)
+                    {
+                        MessageBox.Show(xe.Message, "Calc error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The provided file does not exist.", "md5mgr", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,7 +52,7 @@ namespace md5Mgr
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("md5mgr by Enderbyte Programs\n\nEasily calculate and compare md5 checksums\n\nVersion 0.1\n(c) 2022-2023 Enderbyte Programs LLC. ALl rights reserved","Md5mgr",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("md5mgr by Enderbyte Programs\n\nEasily calculate and compare md5 checksums\n\nVersion 0.2\n(c) 2022-2023 Enderbyte Programs LLC. ALl rights reserved","Md5mgr",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void button3_Click(object sender, EventArgs e)
